@@ -1,0 +1,4 @@
+http://nbviewer.jupyter.org/github/anthonyng2/
+http://nbviewer.jupyter.org/github/Pierian-Data/
+http://nbviewer.jupyter.org/github/jmportilla/
+https://github.com/amalphonse/Python_WorkBook
