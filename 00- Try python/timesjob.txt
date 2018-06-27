@@ -1,0 +1,86 @@
+import requests
+from bs4 import BeautifulSoup
+
+l = []
+base_url = "https://www.timesjobs.com/candidate/job-search.html?from=submit&actualTxtKeywords=Advanced%20Java&searchBy=0&rdoOperator=OR&searchType=personalizedSearch&txtLocation=Chennai&luceneResultSize=25&postWeek=60&txtKeywords=advanced%20java&pDate=I&sequence="    
+for page in range(1,11,1):
+    print(base_url+str(page)+str('&startPage=1'))
+    r = requests.get(base_url+str(page)+str('&startPage=1'))
+    c = r.content
+    soup = BeautifulSoup(c,"html.parser")
+    all = soup.find_all("div",{"class":"job-list-container"})
+    for item in all:
+        d = {}
+        try:
+            d["Company"] = item.find_all("h3",{"class":"joblist-comp-name"})[0].text.replace("\n","").replace(" ","").replace("\r","").replace("\t","")
+        except:
+            d["Company"] = None
+            
+        try:
+            d["Exp&Location"] = item.find_all("ul",{"class":"job-more-dtl clearfix"})[0].text.replace("\n","").replace(" ","").replace("\r","").replace("\t","")
+        except:
+            d["Exp&Location"] = None
+        
+        try:
+            d["Keyskills"] = item.find_all("span",{"class":"srp-skills"})[0].text.replace("\n","")
+        except:
+            d["Keyskills"] = None
+        l.append(d)
+
+m = []
+base_url = "https://www.timesjobs.com/candidate/job-search.html?from=submit&actualTxtKeywords=Advanced%20Java&searchBy=0&rdoOperator=OR&searchType=personalizedSearch&txtLocation=Chennai&luceneResultSize=25&postWeek=60&txtKeywords=advanced%20java&pDate=I&sequence="    
+for page in range(11,21,1):
+    print(base_url+str(page)+str('&startPage=11'))
+    r = requests.get(base_url+str(page)+str('&startPage=11'))
+    c = r.content
+    soup = BeautifulSoup(c,"html.parser")
+    all = soup.find_all("div",{"class":"job-list-container"})
+    for item in all:
+        d = {}
+        try:
+            d["Company"] = item.find_all("h3",{"class":"joblist-comp-name"})[0].text.replace("\n","").replace(" ","").replace("\r","").replace("\t","")
+        except:
+            d["Company"] = None
+            
+        try:
+            d["Exp&Location"] = item.find_all("ul",{"class":"job-more-dtl clearfix"})[0].text.replace("\n","").replace(" ","").replace("\r","").replace("\t","")
+        except:
+            d["Exp&Location"] = None
+        
+        try:
+            d["Keyskills"] = item.find_all("span",{"class":"srp-skills"})[0].text.replace("\n","")
+        except:
+            d["Keyskills"] = None
+        m.append(d)
+
+n = []
+base_url = "https://www.timesjobs.com/candidate/job-search.html?from=submit&actualTxtKeywords=Advanced%20Java&searchBy=0&rdoOperator=OR&searchType=personalizedSearch&txtLocation=Chennai&luceneResultSize=25&postWeek=60&txtKeywords=advanced%20java&pDate=I&sequence="    
+for page in range(21,31,1):
+    print(base_url+str(page)+str('&startPage=21'))
+    r = requests.get(base_url+str(page)+str('&startPage=21'))
+    c = r.content
+    soup = BeautifulSoup(c,"html.parser")
+    all = soup.find_all("div",{"class":"job-list-container"})
+    for item in all:
+        d = {}
+        try:
+            d["Company"] = item.find_all("h3",{"class":"joblist-comp-name"})[0].text.replace("\n","").replace(" ","").replace("\r","").replace("\t","")
+        except:
+            d["Company"] = None
+            
+        try:
+            d["Exp&Location"] = item.find_all("ul",{"class":"job-more-dtl clearfix"})[0].text.replace("\n","").replace(" ","").replace("\r","").replace("\t","")
+        except:
+            d["Exp&Location"] = None
+        
+        try:
+            d["Keyskills"] = item.find_all("span",{"class":"srp-skills"})[0].text.replace("\n","")
+        except:
+            d["Keyskills"] = None
+        n.append(d)
+		
+import pandas
+df1=pandas.DataFrame(l).append(m).append(n)
+df1
+
+df1.to_csv("#Yourname.csv")

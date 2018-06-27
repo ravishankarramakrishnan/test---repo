@@ -1,0 +1,30 @@
+import re
+import numpy as np
+import pandas as pd
+import docx2txt
+
+import os
+file_list = [f for f in os.listdir('.') if os.path.isfile(os.path.join('.', f))]
+print(file_list)
+
+file_list
+
+for f in file_list:
+    if f.endswith('.docx'):
+        resume = docx2txt.process("{}".format(f))
+        match = re.findall(r'[\w\.-]+@[\w\.-]+', resume)
+        print(match)
+        
+
+l = []
+for f in file_list:
+    if f.endswith('.docx'):
+        resume = docx2txt.process("{}".format(f))
+        match = re.findall(r'[\w\.-]+@[\w\.-]+', resume)
+        print(match)
+        l.append(match)
+
+import pandas
+df = pandas.DataFrame(l)
+df
+df.to_csv('data')
